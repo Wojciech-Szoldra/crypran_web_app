@@ -83,15 +83,53 @@
             }
         });
 
-        // Kopiowanie hasła do schowka
+        // ZAKTUALIZOWANA funkcja kopiowania hasła do schowka
+        // Używa nowoczesnego Clipboard API, które działa niezależnie od widoczności hasła
         $(document).on('click', '#copy-password', function() {
-            const passwordField = $('#password');
-            passwordField.select();
-            document.execCommand('copy');
+            const passwordValue = $('#password').val();
             
-            $('#status').html('Hasło skopiowane do schowka!').removeClass().addClass('status success').show();
-            setTimeout(function() { $('#status').fadeOut(); }, 3000);
+            // Użyj nowoczesnego Clipboard API
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(passwordValue)
+                    .then(function() {
+                        $('#status').html('Hasło skopiowane do schowka!').removeClass().addClass('status success').show();
+                        setTimeout(function() { $('#status').fadeOut(); }, 3000);
+                    })
+                    .catch(function(err) {
+                        // Fallback do starszej metody w przypadku błędu
+                        fallbackCopyToClipboard(passwordValue);
+                    });
+            } else {
+                // Fallback dla przeglądarek bez wsparcia dla Clipboard API
+                fallbackCopyToClipboard(passwordValue);
+            }
         });
+        
+        // Funkcja alternatywna kopiowania dla starszych przeglądarek
+        function fallbackCopyToClipboard(text) {
+            // Utwórz tymczasowy element input
+            const tempInput = document.createElement('input');
+            tempInput.style.position = 'absolute';
+            tempInput.style.left = '-1000px';
+            tempInput.style.top = '-1000px';
+            tempInput.value = text;
+            document.body.appendChild(tempInput);
+            
+            // Zaznacz i skopiuj
+            tempInput.select();
+            
+            try {
+                const successful = document.execCommand('copy');
+                const msg = successful ? 'Hasło skopiowane do schowka!' : 'Nie udało się skopiować hasła';
+                $('#status').html(msg).removeClass().addClass(successful ? 'status success' : 'status error').show();
+            } catch (err) {
+                $('#status').html('Błąd podczas kopiowania: ' + err).removeClass().addClass('status error').show();
+            }
+            
+            // Usuń tymczasowy element
+            document.body.removeChild(tempInput);
+            setTimeout(function() { $('#status').fadeOut(); }, 3000);
+        }
     });
 </script>
 {% endblock %}

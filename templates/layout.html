@@ -27,7 +27,7 @@
             margin-bottom: 8px;
             font-weight: bold;
         }
-        input[type="number"], input[type="text"] {
+        input[type="number"], input[type="text"], input[type="password"] {
             padding: 10px;
             width: 100%;
             border: 1px solid #ddd;
@@ -86,7 +86,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Crypran</h1>
+        <h1>Crypran - Generator haseł</h1>
         
         <div class="flash-messages">
             {% with messages = get_flashed_messages(with_categories=true) %}
