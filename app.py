@@ -5,6 +5,9 @@ from flask import Flask, render_template, request, jsonify, flash, redirect, url
 app = Flask(__name__)
 app.secret_key = 'twoj_tajny_klucz_aplikacji'  # Wymagane do działania flash i session
 
+print(__name__)
+print(string.__name__)
+
 # Generowanie hasła - funkcja pozostaje prawie taka sama
 def generate_password(length=12):
     alphabet = string.ascii_letters + string.digits + string.punctuation
