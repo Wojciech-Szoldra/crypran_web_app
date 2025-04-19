@@ -1,6 +1,10 @@
 # Odkodowanie payloadu
-import base64, json
+import base64, json, string,random
 
-data = 'eJwNyMENgCAMBdBdmKDYAr8uY5oWw00jBw_G3fX43pNOm_M-rtiGzZHW5HnvC0er6lQA91JZzfBHjjAKzQQVFzDArCql_1YSmINaej8-9ReW'
+data = 'eyJwYXNzd29yZCI6IjctaEZrYDk7QjklPiJ9'
 decoded = base64.urlsafe_b64decode(data + "==")
 print(json.loads(decoded))
+
+pass_seq = string.ascii_letters + string.digits + string.punctuation
+test = ''.join(random.choice(pass_seq) for i in range(12))
+print(test)
