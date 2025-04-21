@@ -17,4 +17,4 @@ hash1 = hash_test('test1')
 hash2 = hash_test('test1')
 
 if hash1 == hash2:
-    print('Hashes are equal')
+    print(f'hash1: {hash1} \nhash2: {hash2} \nHashes are equal')
