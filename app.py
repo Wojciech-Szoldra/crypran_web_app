@@ -9,7 +9,7 @@ app = Flask(__name__)
 load_dotenv()  # Wczytanie zmiennych środowiskowych z pliku .env
 app.secret_key = os.getenv('SECRET_KEY')  # klucz do HMAC-SHA256
 
-# Generowanie hasła - funkcja pozostaje prawie taka sama
+# Generowanie hasła
 def generate_password(length=12):
     alphabet = string.ascii_letters + string.digits + string.punctuation
     return ''.join(secrets.choice(alphabet) for i in range(length))
