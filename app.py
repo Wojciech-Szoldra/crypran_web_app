@@ -45,6 +45,7 @@ def api_generate():
     """Endpoint API do generowania hasła (dla żądań AJAX)"""
     try:
         data = request.get_json()
+        print(data)
         length = int(data.get('length', 12))
         
         if length <= 0:
