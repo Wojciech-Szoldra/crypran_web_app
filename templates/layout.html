@@ -8,11 +8,23 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+        :root {
+            --accent: #4d96c7;
+            --accent-strong: rgba(77,150,199,0.6);
+            --heading-color: #2E3A59;
+        }
+
         body {
             font-family: Inter, sans-serif;
             max-width: 800px;
             margin: 0 auto;
-            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 0;
+            background-color: #1e1e2f;
         }
         .container {
             background-color: #f8f9fa;
@@ -20,6 +32,36 @@
             padding: 30px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
+
+        /* Nagłówek z delikatną, „zanurzoną” kreską */
+        .container h1 {
+            display: inline-block;
+            font-size: 2.2rem;
+            font-weight: 600;
+            color: var(--heading-color);
+            text-align: center;
+            letter-spacing: 0.5px;
+            margin-bottom: 2rem;
+            position: relative;
+
+            /* lekki cień tekstu dla spójności z cieniem kreski */
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+        }
+        .container h1::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: -4px;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 2px;
+            background-color: var(--accent-strong);
+            border-radius: 1px;
+
+            /* drobny cień pod kreską */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
         .form-group {
             margin-bottom: 20px;
         }
@@ -28,7 +70,9 @@
             margin-bottom: 8px;
             font-weight: bold;
         }
-        input[type="number"], input[type="text"], input[type="password"] {
+        input[type="number"],
+        input[type="text"],
+        input[type="password"] {
             padding: 10px;
             width: 100%;
             border: 1px solid #ddd;
@@ -37,7 +81,7 @@
             box-sizing: border-box;
         }
         button {
-            background-color: #4CAF50;
+            background-color: var(--accent);
             color: white;
             border: none;
             padding: 10px 15px;
@@ -46,21 +90,19 @@
             font-size: 16px;
         }
         button:hover {
-            background-color: #45a049;
+            background-color: #3e7aa1;
         }
         .password-container {
             display: flex;
             align-items: center;
         }
-        .password-input {
-            flex: 1;
-        }
-        .toggle-btn {
-            margin-left: 10px;
-            background-color: #555;
-        }
+        .password-input,
+        .toggle-btn,
         .copy-btn {
             margin-left: 10px;
+        }
+        .toggle-btn, .copy-btn {
+            background-color: var(--accent);
         }
         .status {
             margin-top: 15px;
@@ -87,7 +129,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Crypran - Generator Haseł</h1>
+        <h1>Crypran – Generator Haseł</h1>
         
         <div class="flash-messages">
             {% with messages = get_flashed_messages(with_categories=true) %}
