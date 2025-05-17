@@ -17,6 +17,7 @@
 
         body {
             font-family: Inter, sans-serif;
+            width: 400px;
             max-width: 800px;
             margin: 0 auto;
             display: flex;
@@ -31,9 +32,10 @@
             border-radius: 10px;
             padding: 25px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            width: 100%;
         }
 
-        /* Nagłówek z delikatną, „zanurzoną” kreską */
+        /* Nagłówek */
         .container h1 {
             display: inline-block;
             font-size: 1.8rem;
@@ -44,8 +46,7 @@
             margin-bottom: 1rem;
             position: relative;
 
-            /* lekki cień tekstu dla spójności z cieniem kreski */
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.05); /* Cień pod tekstem */
         }
         .container h1::after {
             content: "";
@@ -129,7 +130,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Crypran – Generator Haseł</h1>
+        <h1>Crypran</h1>
         
         <div class="flash-messages">
             {% with messages = get_flashed_messages(with_categories=true) %}
