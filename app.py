@@ -53,7 +53,8 @@ def api_generate():
             return jsonify({'error': 'Długość nie może być większa niż 50.'}), 400
         
         password = generate_password(length)
-        session['password_hash'] = hash_password(password)  # Przechowanie hasha hasła w sesji
+        #session['password_hash'] = hash_password(password)  # Przechowanie hasha hasła w sesji
+        session['password_hash'] = password  # Przechowanie hasha hasła w sesji
         
         return jsonify({'password': password, 'message': 'Hasło wygenerowane!'})
     except ValueError:
